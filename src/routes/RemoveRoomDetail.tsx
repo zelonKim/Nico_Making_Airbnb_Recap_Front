@@ -22,7 +22,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { FaBed, FaDollarSign, FaToilet } from "react-icons/fa";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   IUploadRoomVariables,
   getAmenities,
@@ -45,12 +45,14 @@ export default function RemoveRoomDetail() {
   const toast = useToast();
   const navigate = useNavigate();
 
+  const queryClient = useQueryClient();
+
   const mutation = useMutation(removeRoom, {
     onSuccess: () => {
+      queryClient.refetchQueries(["rooms"]);
       toast({
         title: "방이 삭제되었습니다.",
         status: "success",
-        position: "bottom-right",
       });
       navigate(`/`);
     },
@@ -58,7 +60,6 @@ export default function RemoveRoomDetail() {
       toast({
         title: "방의 소유자만 삭제할 수 있습니다.",
         status: "error",
-        position: "bottom-right",
       });
       navigate(`/`);
     },

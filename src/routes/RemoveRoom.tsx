@@ -51,45 +51,42 @@ export default function RemoveRoom() {
 
   return (
     <ProtectedPage>
-      <HostOnlyPage>
-        <Box
-          mt={10}
-          px={{
-            base: 10,
-            lg: 40,
-          }}
-        >
-          <Container>
-            <Heading textAlign={"center"}>Remove Room</Heading>
+      <Box
+        mt={10}
+        px={{
+          base: 10,
+          lg: 40,
+        }}
+      >
+        <Container>
+          <Heading textAlign={"center"}>방 삭제하기</Heading>
 
-            <VStack
-              spacing={10}
-              mt={5}
-              as="form"
-              onSubmit={handleSubmit(onSubmit)}
-            >
-              <FormControl>
-                <FormLabel>삭제할 방</FormLabel>
-                <Select
-                  {...register("name", { required: true })}
-                  placeholder="삭제할 방을 선택해주세요"
-                >
-                  {data?.map((room) => (
-                    <option key={room.pk} value={room.pk}>
-                      {room.name}
-                    </option>
-                  ))}
-                </Select>
-                <FormHelperText>어떤 방을 삭제하실건가요?</FormHelperText>
-              </FormControl>
+          <VStack
+            spacing={10}
+            mt={5}
+            as="form"
+            onSubmit={handleSubmit(onSubmit)}
+          >
+            <FormControl mt={10} mb={-5}>
+              <Select
+                {...register("name", { required: true })}
+                placeholder="삭제할 방을 선택해주세요"
+              >
+                {data?.map((room) => (
+                  <option key={room.pk} value={room.pk}>
+                    {room.name}
+                  </option>
+                ))}
+              </Select>
+              <FormHelperText>한번 삭제한 방은 다시 되돌릴 수 없습니다.</FormHelperText>
+            </FormControl>
 
-              <Button type="submit" colorScheme={"red"} size="lg" w="100%">
-                방 지우기
-              </Button>
-            </VStack>
-          </Container>
-        </Box>
-      </HostOnlyPage>
+            <Button type="submit" colorScheme={"red"} size="lg" w="100%">
+              삭제하기
+            </Button>
+          </VStack>
+        </Container>
+      </Box>
     </ProtectedPage>
   );
 }

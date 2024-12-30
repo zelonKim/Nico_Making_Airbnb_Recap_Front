@@ -223,29 +223,31 @@ export const createPhoto = ({
 //////////////////
 
 export interface IProfileVariables {
-  avatar: string;
-  name: string;
+  name?: string;
+  email?: string;
   oldPassword: string;
-  newPassword: string;
-  email: string;
+  avatar?: string;
+  gender?: string;
+  language?: string;
+  currency?: string;
 }
 
 export const changeProfile = ({
-  avatar,
-  name,
   oldPassword,
-  newPassword,
-  email,
+  avatar,
+  gender,
+  language,
+  currency,
 }: IProfileVariables) =>
   axiosInstance
     .put(
       `users/change-profile`,
       {
-        avatar,
-        name,
         oldPassword,
-        newPassword,
-        email,
+        avatar,
+        gender,
+        language,
+        currency,
       },
       {
         headers: {

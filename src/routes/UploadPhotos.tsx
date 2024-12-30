@@ -38,16 +38,16 @@ export default function UploadPhotos() {
     onSuccess: () => {
       toast({
         status: "success",
-        title: "이미지가 업로드 되었습니다.",
+        title: "해당 사진을 추가하였습니다.",
         duration: 2000,
-        isClosable: true,
       });
       reset();
+      navigate(`/rooms/${roomPk}`);
     },
     onError: () => {
       toast({
         status: "error",
-        title: "방의 소유자만 업로드할 수 있습니다.",
+        title: "사진을 추가할 권한이 없습니다.",
         duration: 2000,
         isClosable: true,
       });
@@ -83,35 +83,33 @@ export default function UploadPhotos() {
 
   return (
     <ProtectedPage>
-      <HostOnlyPage>
-        <Box pb={40} mt={10} px={{ base: 10, lg: 40 }}>
-          <Container>
-            <Heading textAlign={"center"}> Upload Photo</Heading>
-            <VStack
-              as="form"
-              onSubmit={handleSubmit(onSubmit)}
-              spacing={5}
-              mt={10}
+      <Box pb={40} mt={10} px={{ base: 10, lg: 40 }}>
+        <Container>
+          <Heading textAlign={"center"}> 방 사진 추가하기</Heading>
+          <VStack
+            as="form"
+            onSubmit={handleSubmit(onSubmit)}
+            spacing={5}
+            mt={10}
+          >
+            <FormControl>
+              <Input {...register("file")} type="file" accept="image/*" />
+            </FormControl>
+            <Button
+              isLoading={
+                createPhotoMutation.isLoading ||
+                uploadImageMutation.isLoading ||
+                uploadURLMutation.isLoading
+              }
+              type="submit"
+              w="full"
+              colorScheme={"red"}
             >
-              <FormControl>
-                <Input {...register("file")} type="file" accept="image/*" />
-              </FormControl>
-              <Button
-                isLoading={
-                  createPhotoMutation.isLoading ||
-                  uploadImageMutation.isLoading ||
-                  uploadURLMutation.isLoading
-                }
-                type="submit"
-                w="full"
-                colorScheme={"red"}
-              >
-                사진 올리기
-              </Button>
-            </VStack>
-          </Container>
-        </Box>
-      </HostOnlyPage>
+              추가하기
+            </Button>
+          </VStack>
+        </Container>
+      </Box>
     </ProtectedPage>
   );
 }

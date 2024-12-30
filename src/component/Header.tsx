@@ -133,17 +133,15 @@ export default function Header() {
                 <Avatar name={user.name} src={user.avatar} size={"md"} />
               </MenuButton>
               <MenuList>
-                {user?.is_host ? (
-                  <>
-                    <Link to="/rooms/upload">
-                      <MenuItem>방 올리기</MenuItem>
-                    </Link>
-                    <Link to="/rooms/remove">
-                      <MenuItem>방 지우기</MenuItem>
-                    </Link>
-                  </>
-                ) : null}
-                <MenuItem onClick={onSetting}>프로필 변경</MenuItem>
+                <Link to="/rooms/upload">
+                  <MenuItem>방 게시하기</MenuItem>
+                </Link>
+                <Link to="/rooms/remove">
+                  <MenuItem>방 삭제하기</MenuItem>
+                </Link>
+                <Link to="/users/me">
+                  <MenuItem onClick={onSetting}>프로필 설정</MenuItem>
+                </Link>
                 <MenuItem onClick={onLogOut}>로그아웃</MenuItem>
               </MenuList>
             </Menu>

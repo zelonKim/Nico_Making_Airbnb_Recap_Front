@@ -1,12 +1,13 @@
 .react-calendar {
   width: 100%;
-  background: rgb(251, 224, 224);
+  background: rgb(252, 239, 239);
   border: none;
   box-shadow: var(--chakra-shadows-lg);
   padding: var(--chakra-sizes-5);
   border-radius: 20px;
   font-family: sans-serif;
   line-height: 1.125em;
+  color: black;
 }
 .react-calendar--doubleView {
   width: 700px;
@@ -91,6 +92,7 @@
 .react-calendar__tile:disabled {
   opacity: 0.3;
   pointer-events: none;
+  color: gray;
   background-color: transparent;
 }
 .react-calendar__tile:enabled:hover,

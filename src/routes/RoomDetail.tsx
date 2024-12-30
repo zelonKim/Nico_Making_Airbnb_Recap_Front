@@ -153,7 +153,7 @@ export default function RoomDetail() {
           </GridItem>
         ))}
       </Grid>
-      <Grid gap={20} templateColumns={"2fr 1fr"} maxW="container.lg">
+      <Grid gap={20} templateColumns={"3fr 1fr"} maxW="container.lg">
         <Box>
           <HStack justifyContent={"space-between"} width={"100%"} mt={9}>
             <VStack alignItems={"flex-start"}>
@@ -217,14 +217,14 @@ export default function RoomDetail() {
             </Container>
           </Box>
         </Box>
-        <Box pt={10}>
+        <Box pt={12} mr={"-32"}>
           <Calendar
             onChange={setDates}
             prev2Label={null}
             next2Label={null}
             minDetail="month"
             minDate={new Date()}
-            maxDate={new Date(Date.now() + 60 * 60 * 24 * 7 * 4 * 6 * 1000)}
+            maxDate={new Date(Date.now() + 60 * 60 * 24 * 7 * 4 * 12 * 1000)}
             selectRange
           />
           <Button
