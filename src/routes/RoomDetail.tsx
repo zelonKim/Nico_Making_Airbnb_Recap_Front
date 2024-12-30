@@ -55,19 +55,20 @@ export default function RoomDetail() {
   const [isReviewLoading, setIsReviewLoading] = useState(true);
   const [reviews, setReviews] = useState<IReview[]>([]);
 
+  const baseURL =
+    process.env.NODE_ENV === "development"
+      ? "http://127.0.0.1:8000/api/v1/"
+      : "https://backend.airbnbzelon.xyz/api/v1/";
+
   const fetchRoom = async () => {
-    const response = await fetch(
-      `http://127.0.0.1:8000/api/v1/rooms/${roomPk}`
-    );
+    const response = await fetch(`${baseURL}rooms/${roomPk}`);
     const json = await response.json();
     setRoom(json);
     setIsLoading(false);
   };
 
   const fetchReview = async () => {
-    const response = await fetch(
-      `http://127.0.0.1:8000/api/v1/rooms/${roomPk}/reviews`
-    );
+    const response = await fetch(`${baseURL}rooms/${roomPk}/reviews`);
     const json = await response.json();
     setReviews(json);
     setIsReviewLoading(false);
