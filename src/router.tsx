@@ -11,6 +11,8 @@ import UploadPhotos from "./routes/UploadPhotos.tsx";
 import RemoveRoom from "./routes/RemoveRoom.tsx";
 import RemoveRoomDetail from "./routes/RemoveRoomDetail.tsx";
 import Profile from "./routes/Profile.tsx";
+import ModifyRoom from "./routes/ModifyRoom.tsx";
+import ModifyRoomDetail from "./routes/ModifyRoomDetail.tsx";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +31,14 @@ const router = createBrowserRouter([
       {
         path: "rooms/upload",
         element: <UploadRoom />,
+      },
+      {
+        path: "rooms/modify",
+        element: <ModifyRoom />,
+      },
+      {
+        path: "rooms/modify/:roomPk",
+        element: <ModifyRoomDetail />,
       },
       {
         path: "rooms/remove",

@@ -136,6 +136,9 @@ export default function Header() {
                 <Link to="/rooms/upload">
                   <MenuItem>방 게시하기</MenuItem>
                 </Link>
+                <Link to="/rooms/modify">
+                  <MenuItem>방 수정하기</MenuItem>
+                </Link>
                 <Link to="/rooms/remove">
                   <MenuItem>방 삭제하기</MenuItem>
                 </Link>

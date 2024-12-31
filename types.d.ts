@@ -5,7 +5,7 @@ export interface IPhoto {
 }
 
 export interface IRoomList {
-  pk: number;
+  pk: string;
   name: string;
   country: string;
   city: string;
@@ -22,19 +22,19 @@ export interface IRoomOwner {
 }
 
 export interface IAmenity {
-  pk: number;
+  pk: string;
   name: string;
   description: string;
 }
 
 export interface ICategory {
-  pk: number;
+  pk: string;
   name: string;
   kind: string;
 }
 
 export interface IRoomDetail extends IRoomList {
-  id: number;
+  id: string;
   created_at: string;
   updated_at: string;
   rooms: number;

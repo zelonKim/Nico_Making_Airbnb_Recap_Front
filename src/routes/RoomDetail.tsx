@@ -29,6 +29,11 @@ import "react-calendar/dist/Calendar.css";
 import { Helmet } from "react-helmet";
 import "../calendar.css";
 
+export const baseURL =
+  process.env.NODE_ENV === "development"
+    ? "http://127.0.0.1:8000/api/v1/"
+    : "https://backend.airbnbzelon.xyz/api/v1/";
+
 export default function RoomDetail() {
   const {
     isLoading: userIsLoading,
@@ -41,7 +46,7 @@ export default function RoomDetail() {
   const { register, watch, handleSubmit } = useForm<IReview>();
 
   const { roomPk } = useParams();
-  // const { isLoading, data } = useQuery<IRoomDetail[]>([`rooms`, roomPk], getRoom);
+  // const { isLoading, data } = useQuery<IRoomDetail>([`rooms`, roomPk], getRoom);
 
   // const { data: reviewsData, isLoading: isReviewsLoading } = useQuery<
   //   IReview[]
@@ -54,11 +59,6 @@ export default function RoomDetail() {
 
   const [isReviewLoading, setIsReviewLoading] = useState(true);
   const [reviews, setReviews] = useState<IReview[]>([]);
-
-  const baseURL =
-    process.env.NODE_ENV === "development"
-      ? "http://127.0.0.1:8000/api/v1/"
-      : "https://backend.airbnbzelon.xyz/api/v1/";
 
   const fetchRoom = async () => {
     const response = await fetch(`${baseURL}rooms/${roomPk}`);

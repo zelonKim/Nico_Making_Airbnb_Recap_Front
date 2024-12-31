@@ -9,6 +9,7 @@ import Cookie from "js-cookie";
 import { IRemoveRoomVariables } from "./routes/RemoveRoom";
 import { IRemoveRoomDetailVariables } from "./routes/RemoveRoomDetail";
 import { formatDate } from "./lib/utils.ts";
+import { IModifyRoom } from "./routes/ModifyRoom.tsx";
 
 const axiosInstance = axios.create({
   baseURL:
@@ -21,7 +22,11 @@ const axiosInstance = axios.create({
 export const getRooms = () =>
   axiosInstance.get("rooms/").then((response) => response.data);
 
-// export const getRoom = ({ queryKey }: any) => {
+// type getRoomQueryKey = [string, string?];
+
+// export const getRoom = ({
+//   queryKey,
+// }: QueryFunctionContext<getRoomQueryKey>) => {
 //   const [_, roomPk] = queryKey;
 //   axiosInstance.get(`rooms/${roomPk}`).then((response) => response.data);
 // };
@@ -151,6 +156,31 @@ export const uploadRoom = (variables: IUploadRoomVariables) =>
     .then((response) => response.data);
 
 ////////////
+
+export interface IModifyRoomVariables {
+  id: string;
+  name: string;
+  country: string;
+  city: string;
+  price: number;
+  rooms: number;
+  toilets: number;
+  description: string;
+  address: string;
+  pet_friendly: boolean;
+  kind: string;
+  amenities: number[];
+  category: number;
+}
+
+export const modifyRoom = (variables: IModifyRoomVariables) =>
+  axiosInstance
+    .put(`rooms/${variables.id}`, variables, {
+      headers: { "X-CSRFToken": Cookie.get("csrftoken") || "" },
+    })
+    .then((response) => response.data);
+
+/////////////
 
 export const uploadReview = ({ roomPk, user, payload, rating }: IReview) =>
   axiosInstance
