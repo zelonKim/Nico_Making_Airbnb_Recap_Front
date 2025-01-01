@@ -78,10 +78,6 @@ export default function Header() {
     mutation.mutate();
   };
 
-  const onSetting = () => {
-    navigate("/users/me");
-  };
-
   return (
     <Stack
       justifyContent={"space-between"}
@@ -143,8 +139,9 @@ export default function Header() {
                   <MenuItem>방 삭제하기</MenuItem>
                 </Link>
                 <Link to="/users/me">
-                  <MenuItem onClick={onSetting}>프로필 설정</MenuItem>
+                  <MenuItem>프로필 설정</MenuItem>
                 </Link>
+
                 <MenuItem onClick={onLogOut}>로그아웃</MenuItem>
               </MenuList>
             </Menu>

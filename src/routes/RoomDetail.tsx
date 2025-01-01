@@ -23,7 +23,7 @@ import React, { useEffect, useState } from "react";
 import Room from "../component/Room.tsx";
 import { FaStar } from "react-icons/fa";
 import { useForm } from "react-hook-form";
-import { checkBooking, getMe, uploadReview } from "../api.ts";
+import { checkBooking, getMe, makeBooking, uploadReview } from "../api.ts";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { Helmet } from "react-helmet";
@@ -116,7 +116,26 @@ export default function RoomDetail() {
     }
   );
 
-  console.log(checkBookingData, isCheckingBooking);
+  const bookMutation = useMutation(makeBooking, {
+    onSuccess: () => {
+      toast({
+        title: "성공적으로 예약되었습니다.",
+        status: "success",
+      });
+    },
+    onError: () => {
+      toast({
+        title: "해당 예약에 실패했습니다.",
+        status: "error",
+      });
+    },
+  });
+
+  const onBookClick = () => {
+    if (dates && roomPk) {
+      bookMutation.mutate({ dates, roomPk });
+    }
+  };
 
   return (
     <Box
@@ -232,6 +251,7 @@ export default function RoomDetail() {
             w="100%"
             colorScheme={"red"}
             mt={5}
+            onClick={onBookClick}
           >
             예약하기
           </Button>

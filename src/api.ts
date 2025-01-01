@@ -320,3 +320,31 @@ export const checkBooking = ({
       .then((response) => response.data);
   }
 };
+
+////////////////
+
+interface makeBookingVariables {
+  dates: Date[];
+  roomPk: string;
+}
+
+export const makeBooking = ({ dates, roomPk }: makeBookingVariables) => {
+  const [firstDate, secondDate] = dates;
+  const checkIn = formatDate(firstDate);
+  const checkOut = formatDate(secondDate);
+
+  return axiosInstance
+    .post(
+      `rooms/${roomPk}/bookings`,
+      {
+        checkIn,
+        checkOut,
+      },
+      {
+        headers: {
+          "X-CSRFToken": Cookie.get("csrftoken") || "",
+        },
+      }
+    )
+    .then((response) => response.data);
+};
